@@ -2,7 +2,7 @@ module UserInfoForm exposing (Event, State, init, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (name, type_, value)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onInput, onSubmit)
 
 
 type State
@@ -11,6 +11,7 @@ type State
 
 type Event
     = NameChanged String
+    | Submitted
 
 
 init : State
@@ -24,12 +25,15 @@ update event state =
         ( Form _, NameChanged name ) ->
             Form name
 
+        ( Form _, Submitted ) ->
+            state
+
 
 view : State -> Html Event
 view state =
     case state of
         Form user ->
-            div []
+            form [ onSubmit Submitted ]
                 [ h1 [] [ text "User Info" ]
                 , label []
                     [ text "Your name"
@@ -41,4 +45,6 @@ view state =
                         ]
                         []
                     ]
+                , button [ type_ "submit" ]
+                    [ text "Next" ]
                 ]
