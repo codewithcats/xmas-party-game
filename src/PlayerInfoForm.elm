@@ -1,4 +1,4 @@
-module PlayerInfoForm exposing (Event, State, init, update, view)
+module PlayerInfoForm exposing (Event(..), State(..), init, update, view)
 
 import Css exposing (..)
 import Html.Styled exposing (..)
@@ -33,7 +33,7 @@ update event state =
 view : State -> Html Event
 view state =
     case state of
-        Form user ->
+        Form playerName ->
             div
                 [ class "flex flex-col items-center"
                 , css [ paddingTop (px 200) ]
@@ -51,9 +51,9 @@ view state =
                         [ text "Your name"
                         , input
                             [ type_ "text"
-                            , name "user_name"
+                            , name "player_name"
                             , onInput NameChanged
-                            , value user
+                            , value playerName
                             , class "border flex-1 ml-4 rounded-sm py-1 px-2"
                             ]
                             []
