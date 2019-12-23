@@ -2,34 +2,34 @@ module Main exposing (main)
 
 import Browser
 import Html.Styled
-import UserInfoForm
+import PlayerInfoForm
 
 
 type State
-    = UserInfoForm UserInfoForm.State
+    = PlayerInfoForm PlayerInfoForm.State
 
 
 initialModel : State
 initialModel =
-    UserInfoForm UserInfoForm.init
+    PlayerInfoForm PlayerInfoForm.init
 
 
 type Event
-    = UserInfoFormEvent UserInfoForm.Event
+    = PlayerInfoFormEvent PlayerInfoForm.Event
 
 
 update : Event -> State -> State
 update event state =
     case ( state, event ) of
-        ( UserInfoForm s, UserInfoFormEvent e ) ->
-            UserInfoForm <| UserInfoForm.update e s
+        ( PlayerInfoForm s, PlayerInfoFormEvent e ) ->
+            PlayerInfoForm <| PlayerInfoForm.update e s
 
 
 view : State -> Html.Styled.Html Event
 view state =
     case state of
-        UserInfoForm s ->
-            Html.Styled.map UserInfoFormEvent <| UserInfoForm.view s
+        PlayerInfoForm s ->
+            Html.Styled.map PlayerInfoFormEvent <| PlayerInfoForm.view s
 
 
 main : Program () State Event

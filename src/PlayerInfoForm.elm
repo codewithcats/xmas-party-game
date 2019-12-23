@@ -1,4 +1,4 @@
-module UserInfoForm exposing (Event, State, init, update, view)
+module PlayerInfoForm exposing (Event, State, init, update, view)
 
 import Css exposing (..)
 import Html.Styled exposing (..)
