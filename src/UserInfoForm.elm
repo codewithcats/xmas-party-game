@@ -54,9 +54,11 @@ view state =
                         ]
                         []
                     ]
-                , button
-                    [ type_ "submit"
-                    , class "bg-blue-400 text-white rounded-sm py-1"
+                , div [ class "text-right" ]
+                    [ button
+                        [ type_ "submit"
+                        , class "bg-blue-400 text-white rounded-sm py-1 w-16"
+                        ]
+                        [ text "Next" ]
                     ]
-                    [ text "Next" ]
                 ]
