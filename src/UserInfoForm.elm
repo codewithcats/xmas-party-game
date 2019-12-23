@@ -1,8 +1,9 @@
 module UserInfoForm exposing (Event, State, init, update, view)
 
-import Html exposing (..)
-import Html.Attributes exposing (name, type_, value)
-import Html.Events exposing (onInput, onSubmit)
+import Css exposing (..)
+import Html.Styled exposing (..)
+import Html.Styled.Attributes exposing (class, css, name, type_, value)
+import Html.Styled.Events exposing (onInput, onSubmit)
 
 
 type State
@@ -33,18 +34,29 @@ view : State -> Html Event
 view state =
     case state of
         Form user ->
-            form [ onSubmit Submitted ]
-                [ h1 [] [ text "User Info" ]
-                , label []
+            form
+                [ onSubmit Submitted
+                , class "flex flex-col bg-gray-200 p-4"
+                , css
+                    [ width (px 480)
+                    ]
+                ]
+                [ h1 [ class "text-lg font-bold mb-4" ]
+                    [ text "Who are you?" ]
+                , label [ class "flex mb-2 items-baseline" ]
                     [ text "Your name"
                     , input
                         [ type_ "text"
                         , name "user_name"
                         , onInput NameChanged
                         , value user
+                        , class "border flex-1 ml-4 rounded-sm py-1 px-2"
                         ]
                         []
                     ]
-                , button [ type_ "submit" ]
+                , button
+                    [ type_ "submit"
+                    , class "bg-blue-400 text-white rounded-sm py-1"
+                    ]
                     [ text "Next" ]
                 ]

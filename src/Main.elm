@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html
+import Html.Styled
 import UserInfoForm
 
 
@@ -25,17 +25,17 @@ update event state =
             UserInfoForm <| UserInfoForm.update e s
 
 
-view : State -> Html.Html Event
+view : State -> Html.Styled.Html Event
 view state =
     case state of
         UserInfoForm s ->
-            Html.map UserInfoFormEvent <| UserInfoForm.view s
+            Html.Styled.map UserInfoFormEvent <| UserInfoForm.view s
 
 
 main : Program () State Event
 main =
     Browser.sandbox
         { init = initialModel
-        , view = view
+        , view = view >> Html.Styled.toUnstyled
         , update = update
         }
