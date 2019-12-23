@@ -34,31 +34,36 @@ view : State -> Html Event
 view state =
     case state of
         Form user ->
-            form
-                [ onSubmit Submitted
-                , class "flex flex-col bg-gray-200 p-4"
-                , css
-                    [ width (px 480)
-                    ]
+            div
+                [ class "flex flex-col items-center"
+                , css [ paddingTop (px 200) ]
                 ]
-                [ h1 [ class "text-lg font-bold mb-4" ]
-                    [ text "Who are you?" ]
-                , label [ class "flex mb-2 items-baseline" ]
-                    [ text "Your name"
-                    , input
-                        [ type_ "text"
-                        , name "user_name"
-                        , onInput NameChanged
-                        , value user
-                        , class "border flex-1 ml-4 rounded-sm py-1 px-2"
+                [ form
+                    [ onSubmit Submitted
+                    , class "flex flex-col p-4"
+                    , css
+                        [ width (px 480)
                         ]
-                        []
                     ]
-                , div [ class "text-right" ]
-                    [ button
-                        [ type_ "submit"
-                        , class "bg-blue-400 text-white rounded-sm py-1 w-16"
+                    [ h1 [ class "text-lg font-bold mb-4" ]
+                        [ text "Who are you?" ]
+                    , label [ class "flex mb-2 items-baseline" ]
+                        [ text "Your name"
+                        , input
+                            [ type_ "text"
+                            , name "user_name"
+                            , onInput NameChanged
+                            , value user
+                            , class "border flex-1 ml-4 rounded-sm py-1 px-2"
+                            ]
+                            []
                         ]
-                        [ text "Next" ]
+                    , div [ class "text-right" ]
+                        [ button
+                            [ type_ "submit"
+                            , class "bg-blue-400 text-white rounded-sm py-1 w-16"
+                            ]
+                            [ text "Next" ]
+                        ]
                     ]
                 ]
