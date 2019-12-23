@@ -1,44 +1,38 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
+import Html
+import UserInfoForm
 
 
-type alias Model =
-    { count : Int }
+type State
+    = UserInfoForm UserInfoForm.State
 
 
-initialModel : Model
+initialModel : State
 initialModel =
-    { count = 0 }
+    UserInfoForm UserInfoForm.init
 
 
-type Msg
-    = Increment
-    | Decrement
+type Event
+    = UserInfoFormEvent UserInfoForm.Event
 
 
-update : Msg -> Model -> Model
-update msg model =
-    case msg of
-        Increment ->
-            { model | count = model.count + 1 }
-
-        Decrement ->
-            { model | count = model.count - 1 }
+update : Event -> State -> State
+update event state =
+    case ( state, event ) of
+        ( UserInfoForm s, UserInfoFormEvent e ) ->
+            UserInfoForm <| UserInfoForm.update e s
 
 
-view : Model -> Html Msg
-view model =
-    div []
-        [ button [ onClick Increment ] [ text "+1" ]
-        , div [] [ text <| String.fromInt model.count ]
-        , button [ onClick Decrement ] [ text "-1" ]
-        ]
+view : State -> Html.Html Event
+view state =
+    case state of
+        UserInfoForm s ->
+            Html.map UserInfoFormEvent <| UserInfoForm.view s
 
 
-main : Program () Model Msg
+main : Program () State Event
 main =
     Browser.sandbox
         { init = initialModel
